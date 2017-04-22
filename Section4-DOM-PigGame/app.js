@@ -9,13 +9,11 @@ GAME RULES:
 
 */
 
-var scores, roundScores, activePlayer, dice;
+var scores, roundScores, activePlayer;
 
 scores = [0,0];
 roundScore = 0;
 activePlayer = 0;
-
-dice = Math.floor(Math.random() * 6) + 1;
 
 document.querySelector('#current-' + activePlayer).textContent = dice;
 
@@ -29,13 +27,26 @@ Hidding the dice at the beginning
 document.querySelector('.dice').style.display = 'none';
 */
 
+document.querySelector('.btn-roll').addEventListener('click', function() {
+	
+	// 1. Random number
+	var dice = Math.floor(Math.random() * 6) + 1;
+
+	//2. Display the result
+	
+
+	//3. Update the round score IF the rolled number was NOT a 1
+	
+	
+});
 
 
+// Callback function - when a function even is triggering another function
+// to execute 
 
-
-
-
-
-
-
+// Anonymous Function example
+/*document.querySelector('.btn-roll').addEventListener('click', function() {
+	// Function used insinde of a callback that doesn't have a name is called 
+	// Anonymous function
+});*/
 
