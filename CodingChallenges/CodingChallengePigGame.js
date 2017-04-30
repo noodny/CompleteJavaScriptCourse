@@ -128,15 +128,3 @@ function init() {
 
 	document.querySelector('.player-0-panel').classList.add('active');	
 };
-
-
-
-// Callback function - when a function even is triggering another function
-// to execute 
-
-// Anonymous Function example
-/*document.querySelector('.btn-roll').addEventListener('click', function() {
-	// Function used insinde of a callback that doesn't have a name is called 
-	// Anonymous function
-});*/
-

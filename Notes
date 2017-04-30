@@ -1,0 +1,26 @@
+// SECTION 4
+Callback function - when a function even is triggering another function to execute 
+
+Anonymous Function example
+document.querySelector('.btn-roll').addEventListener('click', function() {
+	// Function used insinde of a callback that doesn't have a name is called 
+	// Anonymous function
+});
+
+// SECTION 5
+CONSTRUCTORE / PROTOTYPE = CLASS - in other OOP langs 
+
+INHERITANCE - one object is based on another object
+
+
+* Every JavaScript object has a prototype property, which makes
+inheritance possible in JavaScript;
+* The prototype property of an object is where we put methods and 
+properties that we want other object to inherit;
+* The Constructor's prototype property is NOT the prototype of the 
+Constructor itself, it's the prototype of ALL instances that are
+created through it;
+* When a certain method (or property) is called, the search starts
+in the object itself, and if it cannot be found, the search moves on
+to the object's prototype. This continues until the method is found:
+PROTOTYPE CHAIN.
