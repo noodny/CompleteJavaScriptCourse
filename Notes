@@ -24,3 +24,27 @@ created through it;
 in the object itself, and if it cannot be found, the search moves on
 to the object's prototype. This continues until the method is found:
 PROTOTYPE CHAIN.
+
+Immediately Invoked Functial Expreession
+
+	Example: 
+	(function () {
+		var score = Math.random() * 10;
+		console.log(score >= 5);
+	})();
+
+	* data / variable privary
+	* modularity
+
+Bind / Call / Apply
+
+Call - method borrowing
+	john.presentation.call(emily, 'friendly', 'afternoon');
+
+Apply - method borrowing with array
+	john.presentation.apply(emily, ['friendly', 'afternoon']);
+
+Bind - returns a function - creates a function that returns a function for set parameters
+
+var johnFriendly = john.presentation.bind(john,'friendly');
+johnFriendly('morning');
