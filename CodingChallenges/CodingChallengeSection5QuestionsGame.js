@@ -47,31 +47,27 @@
 	function gameLogic() {
 		var questionToAsk=Math.floor(Math.random()*questions.length);
 
-		while (playGame) {
-			askedQuestion = questions[questionToAsk];
-			askedQuestion.askQuestion(questionToAsk);
+		askedQuestion = questions[questionToAsk];
+		askedQuestion.askQuestion(questionToAsk);
 			
-			var userAnswer = prompt('Specify correct answer:');
+		var userAnswer = prompt('Specify correct answer:');
 			
-			if (userAnswer === "quit") {
-				playGame = false;
-			} else {
-				userAnswer = parseInt(userAnswer);
-			}	
+		if (userAnswer === "quit") {
+			playGame = false;
+		} else {
+			userAnswer = parseInt(userAnswer);
+		}	
 
-			if (userAnswer === "quit") {
-				break;
+		if (userAnswer !== "quit") {
+			if (askedQuestion.validateAnswer(userAnswer)) {
+				userScore += 1;
+				console.log('Score: ' + userScore);
 			} else {
-				if (askedQuestion.validateAnswer(userAnswer)) {
-					userScore += 1;
-					console.log('Score: ' + userScore);
-				} else {
-					console.log('Score: ' + userScore);
-				}
-				gameLogic();
+				console.log('Score: ' + userScore);
 			}
+			gameLogic();
 		}
-	};
+	}
 	gameLogic();
 })();
 
