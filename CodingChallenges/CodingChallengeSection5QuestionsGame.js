@@ -3,6 +3,8 @@
 
 var questions = [];
 var questionToAsk = Math.floor(Math.random()*3); // question to ask - random 
+var userAnswer = "";
+var continueGame=true;
 
 function Question(question, answers, correctAnswer) {
 	this.question = question || '';
@@ -19,36 +21,49 @@ addQuestion('Do you like apples?', ['0) Yes', '1) No'], 0);
 addQuestion('Do you like lemon?', ['0) Yes', '1) No'], 1);
 addQuestion('Do you like oranges?', ['0) Yes', '1) No'], 0);
 
-//console.log(questions);
-
-function showPossibleAnswers(question) {
+Question.prototype.showPossibleAnswers = function() {
 	console.log('Possible answers:');
-	for (var i=0; i<questions[question].answers.length; i++) {
-		console.log(questions[question].answers[i]);
+	for (var i=0; i< this.answers.length; i++) {
+		console.log(this.answers[i]);
 	}
 };
 
-function askQuestion(question) {
-	console.log(question+1 + ') ' + questions[question].question);
-	showPossibleAnswers(question);
+Question.prototype.askQuestion = function(questionToAskFor) {
+	console.log(questionToAskFor+1 + ') ' + this.question);
+	this.showPossibleAnswers(questionToAskFor);
 };
 
-askQuestion(questionToAsk);
-
-var userAnswer = Number(prompt('Specify correct answer:'));
-
-//console.log('Provided answer: ' + userAnswer);
-//console.log('Correct answer: ' + correctAnswers[questionToAsk]);
-
-function validateAnswer(providedAnswer, question) {
-	if (providedAnswer === questions[question].correctAnswer) {
+Question.prototype.validateAnswer = function(providedAnswer) {
+	if (providedAnswer === this.correctAnswer) {
 		console.log('Answer is correct!');
 	} else {
-		console.log('Answer is not correct. Correct answer is: ' + questions[question].answers[questions[question].correctAnswer]);
+		console.log('Answer is not correct. Correct answer is: ' + this.answers[this.correctAnswer]);
+	}	
+};
+
+function Game() {
+	questionToAsk=Math.floor(Math.random()*3);
+	askedQuestion = questions[questionToAsk];
+	askedQuestion.askQuestion(questionToAsk);
+	userAnswer = prompt('Specify correct answer:');
+
+	if (userAnswer === "quit") {
+		continueGame = false;
+	} else {
+		userAnswer = Number(userAnswer);
+	}
+	
+	while (continueGame) {
+		if (userAnswer === "quit") {
+			break;
+		} else {
+			askedQuestion.validateAnswer(userAnswer);
+			Game();
+		}
 	}
 };
 
-validateAnswer(userAnswer,questionToAsk);
+Game();
 
 /*
 --- Let's build a fun quiz game in the console! ---
@@ -69,8 +84,7 @@ c) correct answer (I would use a number for this)
 6. Check if the answer is correct and print to the console whether the answer is correct ot nor (Hint: write another method for this).
 
 7. Suppose this code would be a plugin for other programmers to use in their code. So make sure that all your code is private and doesn't interfere with the other programmers code (Hint: we learned a special technique to do exactly that).
-*/
-/*
+
 --- Expert level ---
 
 8. After you display the result, display the next random question, so that the game never ends (Hint: write a function for this and call it right after displaying the result)
