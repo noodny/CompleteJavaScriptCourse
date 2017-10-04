@@ -1,6 +1,6 @@
 /////////////////////////////
 // CODING CHALLENGE
-function init() {
+(function() {
 	var questions = [];
 	var userScore = 0;
 	var playGame=true;
@@ -45,7 +45,7 @@ function init() {
 	};
 
 	function gameLogic() {
-		var questionToAsk=Math.floor(Math.random()*3);
+		var questionToAsk=Math.floor(Math.random()*questions.length);
 
 		while (playGame) {
 			askedQuestion = questions[questionToAsk];
@@ -56,7 +56,7 @@ function init() {
 			if (userAnswer === "quit") {
 				playGame = false;
 			} else {
-				userAnswer = Number(userAnswer);
+				userAnswer = parseInt(userAnswer);
 			}	
 
 			if (userAnswer === "quit") {
@@ -72,10 +72,8 @@ function init() {
 			}
 		}
 	};
-
 	gameLogic();
-}
-init();
+})();
 
 
 /*
