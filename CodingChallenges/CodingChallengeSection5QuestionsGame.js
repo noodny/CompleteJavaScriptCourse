@@ -1,69 +1,82 @@
 /////////////////////////////
 // CODING CHALLENGE
+function init() {
+	var questions = [];
+	var userScore = 0;
+	var playGame=true;
 
-var questions = [];
-var questionToAsk = Math.floor(Math.random()*3); // question to ask - random 
-var userAnswer = "";
-var continueGame=true;
+	function Question(question, answers, correctAnswer) {
+		this.question = question || '';
+		this.answers = answers || [];
+		this.correctAnswer = correctAnswer || 0;
+	};
 
-function Question(question, answers, correctAnswer) {
-	this.question = question || '';
-	this.answers = answers || [];
-	this.correctAnswer = correctAnswer || 0;
-};
+	function addQuestion(question, answer, correctAnswer) {
+		var newQuestion = new Question(question, answer, correctAnswer);
+		questions.push(newQuestion);
+	};
 
-function addQuestion(question, answer, correctAnswer) {
-	var newQuestion = new Question(question, answer, correctAnswer);
-	questions.push(newQuestion);
-};
+	addQuestion('Do you like apples?', ['0) Yes', '1) No'], 0);
+	addQuestion('Do you like lemon?', ['0) Yes', '1) No'], 1);
+	addQuestion('Do you like oranges?', ['0) Yes', '1) No'], 0);
 
-addQuestion('Do you like apples?', ['0) Yes', '1) No'], 0);
-addQuestion('Do you like lemon?', ['0) Yes', '1) No'], 1);
-addQuestion('Do you like oranges?', ['0) Yes', '1) No'], 0);
-
-Question.prototype.showPossibleAnswers = function() {
-	console.log('Possible answers:');
-	for (var i=0; i< this.answers.length; i++) {
-		console.log(this.answers[i]);
-	}
-};
-
-Question.prototype.askQuestion = function(questionToAskFor) {
-	console.log(questionToAskFor+1 + ') ' + this.question);
-	this.showPossibleAnswers(questionToAskFor);
-};
-
-Question.prototype.validateAnswer = function(providedAnswer) {
-	if (providedAnswer === this.correctAnswer) {
-		console.log('Answer is correct!');
-	} else {
-		console.log('Answer is not correct. Correct answer is: ' + this.answers[this.correctAnswer]);
-	}	
-};
-
-function Game() {
-	questionToAsk=Math.floor(Math.random()*3);
-	askedQuestion = questions[questionToAsk];
-	askedQuestion.askQuestion(questionToAsk);
-	userAnswer = prompt('Specify correct answer:');
-
-	if (userAnswer === "quit") {
-		continueGame = false;
-	} else {
-		userAnswer = Number(userAnswer);
-	}
-	
-	while (continueGame) {
-		if (userAnswer === "quit") {
-			break;
-		} else {
-			askedQuestion.validateAnswer(userAnswer);
-			Game();
+	Question.prototype.showPossibleAnswers = function() {
+		console.log('Possible answers:');
+		for (var i=0; i< this.answers.length; i++) {
+			console.log(this.answers[i]);
 		}
-	}
-};
+	};
 
-Game();
+	Question.prototype.askQuestion = function(questionToAskFor) {
+		console.log(questionToAskFor+1 + ') ' + this.question);
+		this.showPossibleAnswers(questionToAskFor);
+	};
+
+	Question.prototype.validateAnswer = function(providedAnswer) {
+		var userGuessed = false;
+		if (providedAnswer === this.correctAnswer) {
+			console.log('Answer is correct!');
+			userGuessed = true;
+			return userGuessed;
+		} else {
+			console.log('Answer is not correct. Correct answer is: ' + this.answers[this.correctAnswer]);
+			return userGuessed;
+		}	
+	};
+
+	function gameLogic() {
+		var questionToAsk=Math.floor(Math.random()*3);
+
+		while (playGame) {
+			askedQuestion = questions[questionToAsk];
+			askedQuestion.askQuestion(questionToAsk);
+			
+			var userAnswer = prompt('Specify correct answer:');
+			
+			if (userAnswer === "quit") {
+				playGame = false;
+			} else {
+				userAnswer = Number(userAnswer);
+			}	
+
+			if (userAnswer === "quit") {
+				break;
+			} else {
+				if (askedQuestion.validateAnswer(userAnswer)) {
+					userScore += 1;
+					console.log('Score: ' + userScore);
+				} else {
+					console.log('Score: ' + userScore);
+				}
+				gameLogic();
+			}
+		}
+	};
+
+	gameLogic();
+}
+init();
+
 
 /*
 --- Let's build a fun quiz game in the console! ---
