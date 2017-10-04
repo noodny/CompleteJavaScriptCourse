@@ -2,43 +2,53 @@
 // CODING CHALLENGE
 
 var questions = [];
-var answers = [];
-var correctAnswers = [];
+var questionToAsk = Math.floor(Math.random()*3); // question to ask - random 
 
-function Question(question, answer, correctAnswer) {
-	questions.push(question);
-	answers.push(answer);
-	correctAnswers.push(correctAnswer);
+function Question(question, answers, correctAnswer) {
+	this.question = question || '';
+	this.answers = answers || [];
+	this.correctAnswer = correctAnswer || 0;
 };
 
-Question('Do you like apples?', ['0) Yes', '1) No'], 0);
-Question('Do you like lemon?', ['0) Yes', '1) No'], 1);
-Question('Do you like oranges?', ['0) Yes', '1) No'], 0);
-
-function ListQuestions(question) {
-	console.log(questions[question]);
-	console.log(answers[question]);
+function addQuestion(question, answer, correctAnswer) {
+	var newQuestion = new Question(question, answer, correctAnswer);
+	questions.push(newQuestion);
 };
 
-var questionToAsk = Math.floor(Math.random()*3);
-console.log(questionToAsk);
+addQuestion('Do you like apples?', ['0) Yes', '1) No'], 0);
+addQuestion('Do you like lemon?', ['0) Yes', '1) No'], 1);
+addQuestion('Do you like oranges?', ['0) Yes', '1) No'], 0);
 
-ListQuestions(questionToAsk);
+//console.log(questions);
 
-var userAnswer = Number(prompt('Specify correct answer:'));
-
-console.log('Provided answer: ' + userAnswer);
-console.log('Correct answer: ' + correctAnswers[questionToAsk]);
-
-function ValidateAnswer(providedAnswer, question) {
-	if (providedAnswer === correctAnswers[question]) {
-		console.log('Answer is correct!');
-	} else {
-		console.log('Answer is not correct. Correct answer is: ' + answers[question][correctAnswers[question]]);
+function showPossibleAnswers(question) {
+	console.log('Possible answers:');
+	for (var i=0; i<questions[question].answers.length; i++) {
+		console.log(questions[question].answers[i]);
 	}
 };
 
-ValidateAnswer(userAnswer,questionToAsk);
+function askQuestion(question) {
+	console.log(question+1 + ') ' + questions[question].question);
+	showPossibleAnswers(question);
+};
+
+askQuestion(questionToAsk);
+
+var userAnswer = Number(prompt('Specify correct answer:'));
+
+//console.log('Provided answer: ' + userAnswer);
+//console.log('Correct answer: ' + correctAnswers[questionToAsk]);
+
+function validateAnswer(providedAnswer, question) {
+	if (providedAnswer === questions[question].correctAnswer) {
+		console.log('Answer is correct!');
+	} else {
+		console.log('Answer is not correct. Correct answer is: ' + questions[question].answers[questions[question].correctAnswer]);
+	}
+};
+
+validateAnswer(userAnswer,questionToAsk);
 
 /*
 --- Let's build a fun quiz game in the console! ---
