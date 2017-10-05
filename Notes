@@ -48,3 +48,10 @@ Bind - returns a function - creates a function that returns a function for set p
 
 var johnFriendly = john.presentation.bind(john,'friendly');
 johnFriendly('morning');
+
+
+prototype vs GetPrototypeOf
+
+If, in the example above, you do var a1 = new A(); var a2 = new A(); then a1.doSomething would actually refer to Object.getPrototypeOf(a1).doSomething, which is the same as the A.prototype.doSomething you defined, i.e. Object.getPrototypeOf(a1).doSomething == Object.getPrototypeOf(a2).doSomething == A.prototype.doSomething.
+
+In short, prototype is for types, while Object.getPrototypeOf() is the same for instances.
