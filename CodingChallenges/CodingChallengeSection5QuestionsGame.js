@@ -16,14 +16,14 @@
 		questions.push(newQuestion);
 	};
 
-	addQuestion('Do you like apples?', ['0) Yes', '1) No'], 0);
-	addQuestion('Do you like lemon?', ['0) Yes', '1) No'], 1);
-	addQuestion('Do you like oranges?', ['0) Yes', '1) No'], 0);
+	addQuestion('Do you like apples?', ['Yes', 'No'], 0);
+	addQuestion('Do you like lemon?', ['Yes', 'No'], 1);
+	addQuestion('Do you like oranges?', ['Yes', 'No'], 0);
 
 	Question.prototype.showPossibleAnswers = function() {
 		console.log('Possible answers:');
 		for (var i=0; i< this.answers.length; i++) {
-			console.log(this.answers[i]);
+			console.log(i + ') ' + this.answers[i]);
 		}
 	};
 
