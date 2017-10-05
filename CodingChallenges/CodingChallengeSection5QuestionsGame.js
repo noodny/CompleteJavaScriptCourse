@@ -71,6 +71,7 @@
 	gameLogic();
 })();
 
+//!!TO_DO - Closures for scoring function - based on example from course
 
 /*
 --- Let's build a fun quiz game in the console! ---
