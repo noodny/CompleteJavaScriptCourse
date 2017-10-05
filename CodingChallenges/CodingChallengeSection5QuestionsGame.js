@@ -37,11 +37,11 @@
 		if (providedAnswer === this.correctAnswer) {
 			console.log('Answer is correct!');
 			userGuessed = true;
-			return userGuessed;
 		} else {
 			console.log('Answer is not correct. Correct answer is: ' + this.answers[this.correctAnswer]);
-			return userGuessed;
 		}	
+		
+		return userGuessed;
 	};
 
 	function gameLogic() {
@@ -56,18 +56,18 @@
 			playGame = false;
 		} else {
 			userAnswer = parseInt(userAnswer);
-		}	
-
-		if (userAnswer !== "quit") {
+			
 			if (askedQuestion.validateAnswer(userAnswer)) {
 				userScore += 1;
 				console.log('Score: ' + userScore);
 			} else {
 				console.log('Score: ' + userScore);
 			}
+			
 			gameLogic();
 		}
 	}
+	
 	gameLogic();
 })();
 
